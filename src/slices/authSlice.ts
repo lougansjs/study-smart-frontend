@@ -17,7 +17,7 @@ type UserBasicInfo = {
   email: string
 }
 
-type UserProfileData = {
+export type UserProfileData = {
   name: string,
   email: string
 }
@@ -28,7 +28,7 @@ type AuthApiState = {
   status: "idle" | "loading" | "failed"
   error: string | null
 }
-
+// (({name, email}) => ({name, email}))(JSON.parse(localStorage.getItem("userInfo") as string))
 const initialState: AuthApiState = {
   basicUserInfo: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo") as string)
@@ -60,7 +60,7 @@ export const register = createAsyncThunk("register", async (data: NewUser) => {
 });
 
 export const logout = createAsyncThunk("logout", async () => {
-  const response = await axiosInstance.post("/logout", {});
+  const response = await axiosInstance.delete("/logout", {});
   const resData = response.data;
 
   localStorage.removeItem("userInfo");

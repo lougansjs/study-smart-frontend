@@ -1,18 +1,26 @@
 import {
-  Avatar,
+  Flex,
   Box,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Stack,
   Button,
-  Container,
-  CssBaseline,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { LockOutlined } from "@mui/icons-material";
+  Image,
+  Text,
+  useColorModeValue,
+  Link as ChakraLink,
+  Heading, 
+} from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAppDispatch } from "../hooks/redux-hooks";
 import { register } from "../slices/authSlice";
+
+import logotipo from '../images/logo-oficial-1.png'
 
 const Register = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +29,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
 
   const handleRegister = async () => {
     // This is only a basic validation of inputs. Improve this as needed.
@@ -43,89 +53,84 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Container maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            mt: 20,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "primary.light" }}>
-            <LockOutlined />
-          </Avatar>
-          <Typography variant="h5">Register</Typography>
-          <Box sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  name="name"
-                  required
-                  fullWidth
-                  id="name"
-                  label="Name"
-                  autoFocus
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password_confirmation"
-                  label="Password Confirmation"
-                  type="password"
-                  id="password_confirmation"
-                  value={password_confirmation}
-                  onChange={(e) => setPasswordConfirmation(e.target.value)}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleRegister}
-            >
-              Register
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link to="/login">Already have an account? Login</Link>
-              </Grid>
-            </Grid>
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>  
+        <Stack align={'center'}>
+          <Box>
+            <Image src={logotipo} alt='Dan Abramov' />
           </Box>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
+          <Heading mb={5} fontSize={'2xl'}>Faça login na sua conta</Heading>
+          <Stack spacing={4}>
+            <FormControl id="name" isRequired>
+              <FormLabel>Full Name</FormLabel>
+              <Input type="text" onChange={(e) => setName(e.target.value)} />
+            </FormControl>
+            <FormControl id="email" isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+            </FormControl>
+            <FormControl id="password" isRequired>
+              <FormLabel>Password</FormLabel>
+              <InputGroup>
+                <Input type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} />
+                <InputRightElement h={'full'}>
+                  <Button
+                    variant={'ghost'}
+                    onClick={() =>
+                      setShowPassword((showPassword) => !showPassword)
+                    }>
+                    {showPassword ? <FiEye /> : <FiEyeOff />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <FormControl id="password" isRequired>
+              <FormLabel>Password Confirmation</FormLabel>
+              <InputGroup>
+                <Input type={showPasswordConfirmation ? 'text' : 'password'} onChange={(e) => setPasswordConfirmation(e.target.value)} />
+                <InputRightElement h={'full'}>
+                  <Button
+                    variant={'ghost'}
+                    onClick={() =>
+                      setShowPasswordConfirmation((showPasswordConfirmation) => !showPasswordConfirmation)
+                    }>
+                    {showPasswordConfirmation ? <FiEye /> : <FiEyeOff />}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+            <Stack spacing={10} pt={2}>
+              <Button
+                onClick={handleRegister}
+                loadingText="Submitting"
+                size="lg"
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+                Register
+              </Button>
+            </Stack>
+            <Stack pt={6}>
+              <Text align={'center'}>
+                Already a user? <ChakraLink as={ReactRouterLink} color={'blue.400'} to='/login'>Login</ChakraLink>
+              </Text>
+            </Stack>
+          </Stack>
         </Box>
-      </Container>
-    </>
+      </Stack>
+    </Flex>
   );
 };
 
