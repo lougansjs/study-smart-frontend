@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import {Login, Register} from '@pages';
-import {Public, Protected, Home} from '@layouts';
+import {Login, Register} from '@/pages';
+import {Public, Protected, Home} from '@/layouts';
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {

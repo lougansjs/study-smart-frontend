@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useAppSelector } from "@hooks";
+import { useAppSelector } from "@/hooks";
 import { Navigate } from "react-router-dom";
 
 export function Public() {

@@ -15,9 +15,9 @@ import {
 } from '@chakra-ui/react';
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useAppDispatch } from "@hooks/redux-hooks";
-import { login } from "@slices/authSlice";
-import Logo from '@shared/assets/images/logo.png';
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { login } from "@/slices/authSlice";
+import { Logo } from '@/shared';
 
 export function Login() {
   const dispatch = useAppDispatch();

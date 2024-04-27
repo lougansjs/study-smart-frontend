@@ -19,10 +19,9 @@ import {
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
-import { useAppDispatch } from "@hooks/redux-hooks";
-import { register } from "@slices/authSlice";
-
-import logotipo from '@images/logo-oficial-1.png'
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { register } from "@/slices";
+import { Logo } from "@/shared"
 
 export function Register() {
   const dispatch = useAppDispatch();
@@ -63,7 +62,7 @@ export function Register() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>  
         <Stack align={'center'}>
           <Box>
-            <Image src={logotipo} alt='Dan Abramov' />
+            <Image src={Logo} alt='Dan Abramov' />
           </Box>
         </Stack>
         <Box

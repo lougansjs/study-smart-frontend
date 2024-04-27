@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from "@hooks";
-import { getUser, logout, UserProfileData } from "@slices";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getUser, logout, UserProfileData } from "@/slices";
 import { useNavigate } from "react-router-dom";
 import {
   IconButton,
