@@ -12,7 +12,9 @@ import {
   Text,
   useColorModeValue,
   Link as ChakraLink,
-  Heading, 
+  Heading,
+  Icon,
+  IconButton
 } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -84,13 +86,14 @@ const Register = () => {
               <InputGroup>
                 <Input type={showPassword ? 'text' : 'password'} onChange={(e) => setPassword(e.target.value)} />
                 <InputRightElement h={'full'}>
-                  <Button
-                    variant={'ghost'}
+                  <IconButton
+                    variant="link"
+                    aria-label='Confirm Password'
                     onClick={() =>
                       setShowPassword((showPassword) => !showPassword)
-                    }>
-                    {showPassword ? <FiEye /> : <FiEyeOff />}
-                  </Button>
+                    }
+                    icon= { <Icon as={ showPassword ? FiEye : FiEyeOff } /> }
+                  />
                 </InputRightElement>
               </InputGroup>
             </FormControl>
@@ -99,13 +102,14 @@ const Register = () => {
               <InputGroup>
                 <Input type={showPasswordConfirmation ? 'text' : 'password'} onChange={(e) => setPasswordConfirmation(e.target.value)} />
                 <InputRightElement h={'full'}>
-                  <Button
-                    variant={'ghost'}
+                  <IconButton
+                    variant="link"
+                    aria-label='Confirm Password'
                     onClick={() =>
                       setShowPasswordConfirmation((showPasswordConfirmation) => !showPasswordConfirmation)
-                    }>
-                    {showPasswordConfirmation ? <FiEye /> : <FiEyeOff />}
-                  </Button>
+                    }
+                    icon= { <Icon as={ showPasswordConfirmation? FiEye : FiEyeOff } /> }
+                  />
                 </InputRightElement>
               </InputGroup>
             </FormControl>
