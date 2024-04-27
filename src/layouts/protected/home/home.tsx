@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getUser, logout, UserProfileData } from "@/slices";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, To, Outlet, useNavigate } from "react-router-dom";
 import {
   IconButton,
   Avatar,
@@ -12,7 +12,6 @@ import {
   VStack,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
@@ -24,6 +23,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Image,
+  Center,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -38,16 +39,19 @@ import {
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 
+import { Logo } from "@/shared"
+
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  url: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, url: '/' },
+  { name: 'Trending', icon: FiTrendingUp, url: '/trending' },
+  { name: 'Explore', icon: FiCompass, url: '/explore'},
+  { name: 'Favourites', icon: FiStar, url: '/favorites' },
+  { name: 'Settings', icon: FiSettings, url: '/settings' },
 ];
 
 export function Home() {
@@ -95,7 +99,7 @@ export function Home() {
       {/* mobilenav */}
       { userProfileInfo && (<MobileNav onOpen={onOpen} handleLogout={handleLogout} userProfileInfo={userProfileInfo} />)}
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <h3>Hello World!</h3>
+        <Outlet />
       </Box>
     </Box>
   );
@@ -118,12 +122,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          <Image src={Logo} alt='Study Smart' />
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} to={link.url} icon={link.icon}>
           {link.name}
         </NavItem>
       ))}
@@ -133,11 +137,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
+  to: To
   children: ReactText;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <RouterLink to={to} style={{ textDecoration: 'none' }}>
       <Flex
         align="center"
         p="4"
@@ -162,7 +167,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         )}
         {children}
       </Flex>
-    </Link>
+    </RouterLink>
   );
 };
 
@@ -237,7 +242,17 @@ const MobileNav = ({ onOpen, handleLogout, userProfileInfo, ...rest }: MobilePro
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
+              <Center>
+                <Avatar
+                  size={'2xl'}
+                  src={'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'}
+                />
+              </Center>
+              <MenuDivider />
+
+              <RouterLink to="/profile">
+                <MenuItem>Profile</MenuItem>
+              </RouterLink>
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />

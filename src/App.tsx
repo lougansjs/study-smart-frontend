@@ -1,7 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import {Login, Register} from '@/pages';
+import {Login, Register, } from '@/pages';
 import {Public, Protected, Home} from '@/layouts';
 import { ChakraProvider } from '@chakra-ui/react'
+import { profileRoutes } from '@/routes'
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
           </Route>
 
           <Route element={<Protected />}>
-            <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home />} >
+            {profileRoutes()}
+          </Route>
+
           </Route>
         </Routes>
       </ChakraProvider>
