@@ -1,8 +1,7 @@
-import React from "react";
 import { Outlet, Navigate } from 'react-router-dom'
-import { useAppSelector } from "../hooks/redux-hooks";
+import { useAppSelector } from "@hooks/redux-hooks";
 
-const ProtectedLayout = () => {
+export function Protected() {
   const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo)
 
   if (!basicUserInfo) {
@@ -15,5 +14,3 @@ const ProtectedLayout = () => {
     </>
   )
 }
-
-export default ProtectedLayout

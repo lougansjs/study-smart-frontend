@@ -1,9 +1,8 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-import { useAppSelector } from "../hooks/redux-hooks";
+import { useAppSelector } from "@hooks";
 import { Navigate } from "react-router-dom";
 
-const DefaultLayout = () => {
+export function Public() {
   const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo);
 
   if (basicUserInfo) {
@@ -16,5 +15,3 @@ const DefaultLayout = () => {
     </>
   );
 };
-
-export default DefaultLayout;

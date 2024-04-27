@@ -19,12 +19,12 @@ import {
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { register } from "../slices/authSlice";
+import { useAppDispatch } from "@hooks/redux-hooks";
+import { register } from "@slices/authSlice";
 
-import logotipo from '../images/logo-oficial-1.png'
+import logotipo from '@images/logo-oficial-1.png'
 
-const Register = () => {
+export function Register() {
   const dispatch = useAppDispatch();
 
   const [name, setName] = useState("");
@@ -137,5 +137,3 @@ const Register = () => {
     </Flex>
   );
 };
-
-export default Register;

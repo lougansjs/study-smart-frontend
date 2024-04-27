@@ -1,10 +1,6 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/Dashboard/Home'
-import Login from './pages/Login';
-import Register from './pages/Register';
-import DefaultLayout from './layouts/DefaultLayout';
-import ProtectedLayout from './layouts/ProtectedLayout';
+import {Login, Register} from '@pages';
+import {Public, Protected, Home} from '@layouts';
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
@@ -12,12 +8,12 @@ function App() {
     <>
       <ChakraProvider>
         <Routes>
-          <Route element={<DefaultLayout />}>
+          <Route element={<Public />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
 
-          <Route element={<ProtectedLayout />}>
+          <Route element={<Protected />}>
             <Route path='/' element={<Home />} />
           </Route>
         </Routes>

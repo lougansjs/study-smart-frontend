@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from "../../hooks/redux-hooks";
-import { getUser, logout, UserProfileData } from "../../slices/authSlice";
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from "@hooks";
+import { getUser, logout, UserProfileData } from "@slices";
 import { useNavigate } from "react-router-dom";
 import {
   IconButton,
@@ -50,7 +50,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Settings', icon: FiSettings },
 ];
 
-export default function Home() {
+export function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dispatch = useAppDispatch();

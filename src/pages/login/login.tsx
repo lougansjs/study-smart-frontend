@@ -15,12 +15,11 @@ import {
 } from '@chakra-ui/react';
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useAppDispatch } from "../hooks/redux-hooks";
-import { login } from "../slices/authSlice";
+import { useAppDispatch } from "@hooks/redux-hooks";
+import { login } from "@slices/authSlice";
+import Logo from '@shared/assets/images/logo.png';
 
-import logotipo from '../images/logo-oficial-1.png'
-
-export default function Login() {
+export function Login() {
   const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState("");
@@ -52,7 +51,7 @@ export default function Login() {
       bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Box>
-          <Image src={logotipo} alt='Dan Abramov' />
+          <Image src={Logo} alt='Dan Abramov' />
         </Box>
         <Box
           rounded={'lg'}
