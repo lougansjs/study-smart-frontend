@@ -1,13 +1,15 @@
-import { Route, Routes } from 'react-router-dom';
-import {Login, Register, } from '@/pages';
-import {Public, Protected, Home} from '@/layouts';
 import { ChakraProvider } from '@chakra-ui/react'
+import { Route, Routes } from 'react-router-dom';
+import {Login, Register, Public, Protected, Home} from '@/presentations';
 import { profileRoutes } from '@/routes'
+import { theme } from "@/config"
 
 function App() {
   return (
     <>
-      <ChakraProvider>
+      <ChakraProvider
+        theme={theme}
+      >
         <Routes>
           <Route element={<Public />}>
             <Route path="/login" element={<Login />} />
