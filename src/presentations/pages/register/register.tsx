@@ -19,8 +19,8 @@ import {
 import { Link as ReactRouterLink } from 'react-router-dom'
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useState } from "react";
-import { useAppDispatch } from "@/hooks/redux-hooks";
-import { register } from "@/slices";
+import { useAppDispatch } from "@/hooks";
+import { register } from "@/stores";
 import { Logo } from "@/shared"
 
 export function Register() {

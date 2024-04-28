@@ -1,5 +1,5 @@
 import { Route } from "react-router-dom"
-import { Profile } from "@/pages"
+import { Profile } from "@/presentations"
 
 export const profileRoutes = () => (
   <>

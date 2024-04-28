@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom'
-import { useAppSelector } from "@/hooks/redux-hooks";
+import { useAppSelector } from "@/hooks";
 
 export function Protected() {
   const basicUserInfo = useAppSelector((state) => state.auth.basicUserInfo)
