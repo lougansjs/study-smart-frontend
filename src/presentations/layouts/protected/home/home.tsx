@@ -9,7 +9,6 @@ import {
   DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react';
-
 import { MobileNav, SidebarContent } from '.';
 
 
@@ -62,4 +61,3 @@ export function Home() {
     </Box>
   );
 }
-
