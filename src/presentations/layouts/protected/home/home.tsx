@@ -25,7 +25,6 @@ import {
   MenuList,
   Image,
   Center,
-  Switch,
   useColorMode,
   Button,
 } from '@chakra-ui/react';
