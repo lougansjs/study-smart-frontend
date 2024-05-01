@@ -31,39 +31,39 @@ export function Profile() {
 
   const [profileImage, setProfileImage] = useState<string>(ProfileImg);
   const [selectedFileName, setSelectedFileName] = useState<string>("");
-  const [alertMessage, setAlertMessage] = useState<AlertMessage[]>([]);
+  const [alertMessages, setAlertMessages] = useState<AlertMessage[]>([]);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
     if (userProfileInfo) {
-      setName(userProfileInfo.name)
-      setEmail(userProfileInfo.email)
+      setName(userProfileInfo.name || "");
+      setEmail(userProfileInfo.email || "");
     }
-  }, [userProfileInfo])
+  }, [userProfileInfo]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
-    if (alertMessage) {
+    if (alertMessages.length > 0) {
       timer = setTimeout(() => {
-        setAlertMessage([]);
+        setAlertMessages([]);
       }, 5000);
     }
 
     return () => clearTimeout(timer);
-  }, [alertMessage]);
+  }, [alertMessages]);
 
   const addAlertMessage = (message: string, type: AlertType) => {
-    setAlertMessage([...alertMessage, { message, type}]);
+    setAlertMessages((prevAlerts) => [...prevAlerts, { message, type }]);
   };
 
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    let file = e.target.files?.[0];
+    const file = e.target.files?.[0];
 
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        addAlertMessage("A imagem selecionada excede o limite de tamanho de 5MB.", "error")
+        addAlertMessage("A imagem selecionada excede o limite de tamanho de 5MB.", "error");
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
@@ -75,9 +75,10 @@ export function Profile() {
       try {
         const resizedImage = await resizeImage(file, 315, 315);
         setProfileImage(resizedImage);
-        setAlertMessage([]);
+        setAlertMessages([]);
       } catch (error) {
         console.error("Erro ao redimensionar imagem:", error);
+        addAlertMessage("Erro ao redimensionar a imagem.", "error");
       }
     }
   };
@@ -113,9 +114,10 @@ export function Profile() {
         addAlertMessage("Perfil atualizado com sucesso!", "success");
       } catch (e) {
         console.error(e);
+        addAlertMessage("Erro ao atualizar o perfil.", "error");
       }
     } else {
-      // Show an error message.
+      addAlertMessage("Por favor, preencha todos os campos.", "error");
     }
   };
 
@@ -148,11 +150,11 @@ export function Profile() {
               <Button colorScheme="blue" variant="outline" onClick={() => fileInputRef.current && fileInputRef.current.click()}>Carregar nova imagem</Button>
             </Flex>
             <br /><br />
-            {alertMessage.map((alert, index) => (
+            {alertMessages.map((alert, index) => (
               <Alert status={alert.type} key={index} position="fixed" bottom="16px" right="16px" width="auto" >
                 <AlertIcon />
                 <AlertTitle mr={10}>{alert.message}</AlertTitle>
-                <CloseButton position="absolute" right="8px" top="8px" onClick={() => setAlertMessage([])} />
+                <CloseButton position="absolute" right="8px" top="8px" onClick={() => setAlertMessages([])} />
               </Alert>
             ))}
             <Box fontWeight="bold" mb="4" color="blue.600">Detalhes da Conta</Box>
@@ -203,4 +205,4 @@ export function Profile() {
       </Flex>
     </Flex>
   );
-};
+}
