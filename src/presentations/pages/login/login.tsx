@@ -14,7 +14,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { useAppDispatch } from "@/hooks";
 import { login } from "@/stores";
 import { Logo } from '@/shared';

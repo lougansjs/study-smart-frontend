@@ -78,6 +78,16 @@ export const getUser = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  "users/update_profile",
+  async ({userId, data}: { userId: string, data: UserProfileData }) => {
+    const response = await axiosInstance.put(
+      `/users/${userId}`, data
+    )
+    return response.data
+  }
+)
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -120,7 +130,7 @@ const authSlice = createSlice({
         state.status = "loading";
         state.error = null;
       })
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(logout.fulfilled, (state) => {
         state.status = "idle";
         state.basicUserInfo = null;
       })
