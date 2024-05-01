@@ -34,7 +34,7 @@ export const MobileNav = ({ onOpen, handleLogout, userProfileInfo, ...rest }: Mo
       <IconButton
         onClick={toggleColorMode}
         variant="link"
-        aria-label='Search database'
+        aria-label='Toggle color mode'
         colorScheme={colorMode}  
         size="lg"
         icon={colorMode == "light" ? <FiMoon /> : <FiSun />}
