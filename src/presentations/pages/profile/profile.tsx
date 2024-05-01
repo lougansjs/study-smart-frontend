@@ -193,7 +193,7 @@ export function Profile() {
                 onClick={handleSaveProfile}
                 bg={'blue.400'}
                 color={'white'}
-                loadingText="Submitting"
+                loadingText="Salvando"
                 _hover={{
                   bg: 'blue.500',
                 }}>
